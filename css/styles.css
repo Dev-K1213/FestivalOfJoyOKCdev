@@ -182,65 +182,146 @@ cursor: pointer;
 
 /* Hero Section */
 .hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: white;
-  position: relative;
-  margin-top: 90px;
+    height: 100vh;
+    display: flex;
+    /* Changed align-items and text-align based on the image and your desire for central content */
+    align-items: center; /* Vertically centers the hero-content within the hero */
+    justify-content: center; /* Horizontally centers the hero-content */
+    text-align: center; /* Centers inline content (like text) within hero-content */
+    color: white;
+    position: relative; /* Keep relative if you have other absolutely positioned elements relative to hero */
+    /* REMOVE margin-top: 90px;
+       If you need space from the top, use padding-top on .hero or adjust hero-content margin-top.
+       Having a fixed margin-top here will push the entire hero section down,
+       making it not truly 100vh from the top of the viewport.
+    */
+    padding-top: 90px; /* Use padding-top if you want space from the top,
+                        and ensure hero takes full height excluding this.
+                        Or, if header is fixed, adjust hero-content margin-top.
+                        Given your previous header scroll effect, header is likely fixed,
+                        so the approach below using hero-content margin-top is better.
+                        Let's remove this if your header is fixed. */
 }
 
-
 .hero-content {
-max-width: 800px;
-margin: 0 auto;
-padding: 20px;
+    /* REMOVE max-width: 800px; margin: 0 auto; if you want the logo to be the primary width driver */
+    /* Instead, make hero-content a flex container to center its own children */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Horizontally center children (logo, p, countdown) */
+    /* Max width can be useful here if your hero-content text shouldn't stretch too wide */
+    max-width: 900px; /* Adjust as needed */
+    width: 100%; /* Take full available width of parent */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    /* Use margin-top to account for a fixed header if your header is 90px tall */
+    margin-top: -50px; /* Adjust this value to shift the entire content block up or down */
+    /* If your header is NOT fixed and just pushes content down, then the `margin-top: 90px;` on `.hero` would be appropriate, but it complicates 100vh. A better approach for fixed headers is to set padding on the body or margin on the first section. */
+}
+
+/* This is the crucial part for the logo */
+.hero-logo {
+    /* REMOVE: position: absolute; top; left; */
+    width: 80vw; /* Start with a responsive width, e.g., 70% of viewport width */
+    max-width: 650px; /* Set a maximum width so it doesn't get too huge on big screens */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space between logo and the next element (paragraph) */
+    z-index: 10; /* Keep z-index if it needs to stack above background elements */
 }
 
 .hero h1 {
-font-size: 4rem;
-color: white;
-margin-bottom: 20px;
-text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    /* If you're using the logo as the main title, you might not need an <h1> in HTML,
+       or you could hide it visually for accessibility.
+       If you keep it, ensure it's below the logo in HTML. */
+    font-size: 4rem; /* Consider responsive units like vw for text too */
+    font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hero p {
-font-size: 1.5rem;
-margin-bottom: 30px;
-text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem; /* Consider responsive units */
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Responsive font size */
+    margin-bottom: 30px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .countdown {
-display: flex;
-justify-content: center;
-gap: 20px;
-margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap; /* Ensure countdown items wrap on small screens */
 }
 
 .countdown-item {
-background: rgba(255, 255, 255, 0.2);
-backdrop-filter: blur(10px);
-border-radius: 10px;
-padding: 15px;
-min-width: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 100px;
+    color: white; /* Ensure text color is white in countdown items */
 }
 
 .countdown-number {
-font-size: 2.5rem;
-font-weight: 700;
-margin-bottom: 5px;
+    font-size: 2.5rem; /* Consider responsive units */
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .countdown-label {
-font-size: 1rem;
-text-transform: uppercase;
-letter-spacing: 1px;
+    font-size: 1rem; /* Consider responsive units */
+    font-size: clamp(0.7rem, 1.5vw, 1rem); /* Responsive font size */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* About Section */
-/* Add this to your existing CSS or replace the .about section styles */
+/* Media queries for fine-tuning on smaller screens */
+@media (max-width: 768px) {
+    .hero-logo {
+        width: 80vw; /* Make it a bit wider on smaller screens if needed */
+        max-width: 400px;
+    }
+    /* You might want to adjust margin-top on hero-content if the header is very tall */
+    /* .hero-content { margin-top: -30px; } */
+}
 
+@media (max-width: 480px) {
+    .hero-logo {
+        width: 90vw; /* Even wider on very small screens */
+        max-width: 300px;
+    }
+    .countdown-item {
+        min-width: 70px; /* Adjust min-width for very small screens */
+        padding: 10px;
+    }
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+    .countdown-label {
+        font-size: 0.6rem;
+    }
+}
+
+/* Sechedule Section */
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Makes section fill full screen height */
+  text-align: center;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Ratha Yatra Section */
 .ratha-yatra-section {
     padding: 60px 0; /* Adjust padding as needed */
     background-color: #55506e; /* Light background to match the image */

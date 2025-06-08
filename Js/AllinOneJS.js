@@ -30,41 +30,44 @@ window.addEventListener('scroll', function() {
 });
 
 // Countdown timer
+let countdownInterval; // Declare it outside to be able to clear it
+
 function updateCountdown() {
-    // Set the event date for September 7, 2025 at 4:00 PM (16:00:00)
-    const eventDate = new Date('September 7, 2025 16:00:00').getTime();
+    // Define the event date specifically for Oklahoma City (CDT/UTC-5 for Sept 7, 2025)
+    // Using ISO format with timezone offset is generally most reliable.
+    const eventDate = new Date('2025-09-07T16:00:00-05:00').getTime(); // 4:00 PM on Sept 7, 2025 in UTC-5 (CDT)
+    // Or if you prefer the string format, be explicit with GMT offset:
+    // const eventDate = new Date('September 7, 2025 16:00:00 GMT-0500').getTime();
+
     const now = new Date().getTime();
     const timeRemaining = eventDate - now;
 
-    // Calculate time components
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-    // Get the elements to update
-    const countdownNumbers = document.querySelectorAll('.countdown-number'); // Select all number elements
+    const countdownNumbers = document.querySelectorAll('.countdown-number');
 
     if (timeRemaining > 0) {
-        // Update the text content of each countdown number element
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
         countdownNumbers[0].textContent = days.toString().padStart(2, '0');
         countdownNumbers[1].textContent = hours.toString().padStart(2, '0');
         countdownNumbers[2].textContent = minutes.toString().padStart(2, '0');
         countdownNumbers[3].textContent = seconds.toString().padStart(2, '0');
     } else {
-        // If the countdown is over
+        // Countdown has finished
         countdownNumbers[0].textContent = '00';
         countdownNumbers[1].textContent = '00';
         countdownNumbers[2].textContent = '00';
         countdownNumbers[3].textContent = '00';
-        // You can add a message here, e.g.,
-        // document.querySelector('.countdown').innerHTML = "<h2>THE EVENT IS LIVE!</h2>";
-        clearInterval(countdownInterval); // Stop the interval when the event is over
+        clearInterval(countdownInterval); // Stop the timer
+        // Optional: Display a message that the event has started
+        // document.querySelector('.countdown').innerHTML = "<h2>The Festival of Joy is LIVE!</h2>";
     }
 }
 
 // Initial call to set the countdown immediately
 updateCountdown();
 
-// Update countdown every second and store the interval ID
-const countdownInterval = setInterval(updateCountdown, 1000);
+// Update countdown every second
+countdownInterval = setInterval(updateCountdown, 1000);

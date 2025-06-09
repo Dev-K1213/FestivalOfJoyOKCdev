@@ -1016,3 +1016,14 @@ nav ul li {
     min-width: 70px;
 }
 }
+
+.stay-tuned-text {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.stay-tuned-text h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+}

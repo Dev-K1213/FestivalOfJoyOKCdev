@@ -29,7 +29,7 @@
                     <li><a href="#activities">Activities</a></li>
                     <li><a href="#location">Location</a></li>
                     <li><a href="#sponsors">Sponsorship</a></li>
-                    <li><a href="#contact" class="btn btn-secondary">Contact</a></li>
+                    <li><a href="https://www.paypal.com/donate/?hosted_button_id=552L99DYHA7VG" target ="_new" class="btn btn-secondary">DONATE</a></li>
                 </ul>
             </nav>
         </div>
@@ -285,7 +285,147 @@
         </div>
     </footer>
 
-    <script src="js/AllinOneJS.js"></script>
-    <script src="js/background-slideshow.js"></script>
+    <script>
+        // Mobile menu toggle
+document.querySelector('.mobile-menu').addEventListener('click', function() {
+    document.querySelector('nav ul').classList.toggle('active');
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        // Close mobile menu after clicking a link
+        document.querySelector('nav ul').classList.remove('active');
+    });
+});
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    }
+});
+
+// Countdown timer
+let countdownInterval; // Declare it outside to be able to clear it
+
+function updateCountdown() {
+    // Define the event date specifically for Oklahoma City (CDT/UTC-5 for Sept 7, 2025)
+    // Using ISO format with timezone offset is generally most reliable.
+    const eventDate = new Date('2025-09-07T16:00:00-05:00').getTime(); // 4:00 PM on Sept 7, 2025 in UTC-5 (CDT)
+    // Or if you prefer the string format, be explicit with GMT offset:
+    // const eventDate = new Date('September 7, 2025 16:00:00 GMT-0500').getTime();
+
+    const now = new Date().getTime();
+    const timeRemaining = eventDate - now;
+
+    const countdownNumbers = document.querySelectorAll('.countdown-number');
+
+    if (timeRemaining > 0) {
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        countdownNumbers[0].textContent = days.toString().padStart(2, '0');
+        countdownNumbers[1].textContent = hours.toString().padStart(2, '0');
+        countdownNumbers[2].textContent = minutes.toString().padStart(2, '0');
+        countdownNumbers[3].textContent = seconds.toString().padStart(2, '0');
+    } else {
+        // Countdown has finished
+        countdownNumbers[0].textContent = '00';
+        countdownNumbers[1].textContent = '00';
+        countdownNumbers[2].textContent = '00';
+        countdownNumbers[3].textContent = '00';
+        clearInterval(countdownInterval); // Stop the timer
+        // Optional: Display a message that the event has started
+        // document.querySelector('.countdown').innerHTML = "<h2>The Festival of Joy is LIVE!</h2>";
+    }
+}
+
+// Initial call to set the countdown immediately
+updateCountdown();
+
+// Update countdown every second
+countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+    
+    <script>
+        // Array of background images
+const backgrounds = [
+    'Backgrounds/background1.webp',
+    'Backgrounds/background2.webp',
+    'Backgrounds/background3.jpg',
+    'Backgrounds/background4.jpg',
+    'Backgrounds/background5.jpg',
+    'Backgrounds/background6.webp',
+];
+
+let currentIndex = 0;
+let isTransitioning = false;
+
+function createBackgroundElement() {
+    const bg = document.createElement('div');
+    bg.className = 'background-slide';
+    bg.style.position = 'absolute';
+    bg.style.top = '0';
+    bg.style.left = '0';
+    bg.style.width = '100%';
+    bg.style.height = '100%';
+    bg.style.backgroundPosition = 'center';
+    bg.style.backgroundSize = 'cover';
+    bg.style.backgroundRepeat = 'no-repeat';
+    bg.style.opacity = '0';
+    bg.style.transition = 'opacity 1.5s ease-in-out';
+    return bg;
+}
+
+function changeBackground() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    const heroSection = document.querySelector('.hero');
+    heroSection.style.position = 'relative';
+    heroSection.style.overflow = 'hidden';
+
+    // Create new background element
+    const newBg = createBackgroundElement();
+    newBg.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${backgrounds[currentIndex]}')`;
+    heroSection.appendChild(newBg);
+
+    // Fade in new background
+    setTimeout(() => {
+        newBg.style.opacity = '1';
+    }, 50);
+
+    // Remove old background after transition
+    setTimeout(() => {
+        const oldBg = heroSection.querySelector('.background-slide:first-child');
+        if (oldBg) {
+            oldBg.remove();
+        }
+        isTransitioning = false;
+    }, 1500);
+
+    currentIndex = (currentIndex + 1) % backgrounds.length;
+}
+
+// Initial background
+changeBackground();
+
+// Change background every 10 seconds
+setInterval(changeBackground, 5000); 
+    </script>
 </body>
 </html>

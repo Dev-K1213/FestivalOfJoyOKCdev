@@ -530,25 +530,63 @@ margin-bottom: 5px;
 
 .activities-grid {
     display: grid;
-    /* This will create a flexible grid with columns that automatically adjust */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px; /* Space between the cards */
-    align-items: start; /* Align items to the start of their grid area */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
 }
 
 .activity-card {
-    background-color: #ffffff; /* White background for each card */
-    border-radius: 8px; /* Slightly rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    overflow: hidden; /* Ensures image corners are rounded with the card */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .activity-card.children-activities,
 .activity-card.ayurveda-health {
-    /* Styles for cards without an image at the top, like Children's Activities and Ayurveda Health */
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Specific grid positioning for cards */
+.activity-card.children-activities {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.activity-card.ayurveda-health {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.activity-card.taste-of-india {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.activity-card.ask-a-monk {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.activity-card.yoga-in-park {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.activity-card.henna {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.activity-card.try-sari-turban {
+    grid-column: 1;
+    grid-row: 3;
 }
 
 .activity-card .activity-image {
@@ -584,68 +622,21 @@ margin-bottom: 5px;
     margin-bottom: 0; /* No bottom margin for paragraphs inside cards */
 }
 
-/* Specific grid adjustments to match the image layout as closely as possible */
-/* You might need to fine-tune these based on your actual content and desired responsiveness */
-.activities-grid {
-    grid-template-columns: repeat(3, 1fr); /* Default to 3 columns */
-    grid-auto-rows: minmax(min-content, max-content); /* Rows adjust to content */
-}
-
-/* Positioning for specific cards to mimic the image layout */
-.activity-card.children-activities {
-    grid-column: span 1; /* Spans 1 column */
-    grid-row: span 1; /* Spans 1 row */
-}
-
-.activity-card.taste-of-india {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.activity-card.ask-a-monk {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.activity-card.free-feast {
-    grid-column: span 1;
-    grid-row: span 2; /* This card appears taller, spanning 2 rows */
-}
-
-.activity-card.yoga-in-park {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.activity-card.henna {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.activity-card.ayurveda-health {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.activity-card.try-sari-turban {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
 /* Responsive adjustments */
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (max-width: 992px) {
     .activities-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .activity-card {
+        grid-column: auto !important;
+        grid-row: auto !important;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 576px) {
     .activities-grid {
-        grid-template-columns: 1fr; /* Single column for small screens */
-    }
-
-    .activity-card.free-feast {
-        grid-row: span 1; /* Remove row span on small screens */
+        grid-template-columns: 1fr;
     }
 }
 

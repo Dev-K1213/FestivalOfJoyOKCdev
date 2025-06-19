@@ -137,6 +137,10 @@ margin-bottom: 0;
 color: var(--secondary);
 }
 
+nav {
+margin-right: 115px;
+}
+
 nav ul {
 display: flex;
 list-style: none;

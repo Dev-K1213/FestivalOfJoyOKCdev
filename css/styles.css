@@ -219,7 +219,7 @@ cursor: pointer;
     padding: 20px;
     box-sizing: border-box; /* Include padding in width calculation */
     /* Use margin-top to account for a fixed header if your header is 90px tall */
-    margin-top: -50px; /* Adjust this value to shift the entire content block up or down */
+    margin-top: 50px; /* Adjust this value to shift the entire content block up or down */
     position: relative; /* Add position relative */
     z-index: 2; /* Add z-index to appear above background */
 }
@@ -285,6 +285,24 @@ cursor: pointer;
     font-size: clamp(0.7rem, 1.5vw, 1rem); /* Responsive font size */
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.hero-sponsor-btn {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid white;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.hero-sponsor-btn:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
 /* Media queries for fine-tuning on smaller screens */

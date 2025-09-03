@@ -458,90 +458,69 @@ cursor: pointer;
 }
 /* Schedule Section */
 .schedule {
-background: linear-gradient(135deg, rgba(255,204,0,0.1) 0%, rgba(255,102,0,0.1) 100%);
-position: relative;
-overflow: hidden;
-}
-
-.schedule::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png');
-opacity: 0.1;
-}
-
-.schedule-container {
-position: relative;
-z-index: 1;
-}
-
-.schedule-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-gap: 30px;
-}
-
-.schedule-card {
-background: white;
-border-radius: 15px;
-overflow: hidden;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-transition: transform 0.3s ease;
-}
-
-.schedule-card:hover {
-transform: translateY(-10px);
-}
-
-.schedule-header {
-background: linear-gradient(to right, var(--primary), var(--secondary));
-color: white;
-padding: 20px;
-text-align: center;
-}
-
-.schedule-header h3 {
-font-size: 1.8rem;
-margin-bottom: 5px;
-color: white;
-}
-
-.schedule-header p {
-font-size: 1.1rem;
-opacity: 0.9;
-}
-
-.schedule-body {
-padding: 20px;
-}
-
-.schedule-item {
-display: flex;
-margin-bottom: 20px;
-padding-bottom: 20px;
-border-bottom: 1px solid #eee;
-}
-
-.schedule-item:last-child {
-margin-bottom: 0;
-padding-bottom: 0;
-border-bottom: none;
-}
-
-.schedule-time {
-min-width: 100px;
-font-weight: 600;
-color: var(--primary);
-}
-
-.schedule-details h4 {
-font-size: 1.2rem;
-margin-bottom: 5px;
-}
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .schedule h2 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+  }
+  
+  .schedule-timeline {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fffaf5;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.15);
+  }
+  
+  .schedule-timeline h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: #ff6600;
+    font-weight: 700;
+  }
+  
+  .schedule-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: #fff;
+    border-left: 4px solid #ff6600;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .schedule-time {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: #ff6600;
+    min-width: 120px;
+  }
+  
+  .schedule-event {
+    flex: 1;
+    color: #333;
+  }
+  
+  /* Mobile-friendly layout */
+  @media (max-width: 600px) {
+    .schedule-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .schedule-time {
+      min-width: auto;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
 
 /* Gallery Section */
 /* Activities Section Styles */
